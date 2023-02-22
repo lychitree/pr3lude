@@ -3,7 +3,7 @@
 echo "pr3lude version 1.0a"
 echo
 echo "Supported versions:"
-echo "3.1.1 (7C145), 3.1.1 (7C146), 3.1.2 (7D11), 3.1.3 (7E18)"
+echo "3.1.1 (7C145), 3.1.1a (7C146), 3.1.2 (7D11), 3.1.3 (7E18)"
 echo "4.x support coming soon"
 if [[ -f bin/xpwntool ]] && [[ -f bin/partialZipBrowser ]] && [[ -f bin/iBoot32Patcher ]] && [[ -f bin/iPwnder32 ]] && [[ -f bin/irecovery ]]
 then
