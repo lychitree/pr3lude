@@ -14,3 +14,21 @@ Supported versions: 3.1.1 (7C145), 3.1.1a (7C146), 3.1.2 (7D11), 3.1.3 (7E18), 4
 # example
 
 `./pr3lude 3.1.3`
+
+# credits
+
+ih8sn0w and dora2ios for iBoot32Patcher
+
+planetbeing for xpwn
+
+dora2ios for iPwnder32
+
+dayt0n for irecovery
+
+tihmstar for partialZipBrowser
+
+ud327 for helping test and giving me the idea to do this in the first place.
+
+iphoneguy1101 for patched/signed 3.1.3 cfw and 4.1 cfw
+
+mo/vanam for the sick honda prelude <3
