@@ -3,8 +3,9 @@
 echo "pr3lude version 1.0a"
 echo
 echo "Supported versions:"
-echo "3.1.1 (7C145), 3.1.1a (7C146), 3.1.2 (7D11), 3.1.3 (7E18)"
-echo "4.x support coming soon"
+echo "3.1.1 (7C145), 3.1.1 (7C146), 3.1.2 (7D11), 3.1.3 (7E18)"
+echo "4.0 (8A293), 4.0.2 (8A400), 4.1 (8B117), 4.2 (8C134), 4.2.1 (8C148)."
+echo "4.3.x and 5.x support coming soon"
 if [[ -f bin/xpwntool ]] && [[ -f bin/partialZipBrowser ]] && [[ -f bin/iBoot32Patcher ]] && [[ -f bin/iPwnder32 ]] && [[ -f bin/irecovery ]]
 then
     echo
@@ -41,7 +42,7 @@ else
     fi
 fi
 
-if [ "$1" == "3.1.1" ] || [ "$1" == "3.1.1a" ] || [ "$1" == "3.1.2" ] || [ "$1" == "3.1.3" ];
+if [ "$1" == "3.1.1" ] || [ "$1" == "3.1.1a" ] || [ "$1" == "3.1.2" ] || [ "$1" == "3.1.3" ] || [[ "$1" == "4.0" ]] || [[ "$1" == "4.0.2" ]] || [[ "$1" == "4.1" ]] || [[ "$1" == "4.2" ]] || [[ "$1" == "4.2.1" ]];
 then
     echo "Firmware detected."
 else
@@ -53,6 +54,11 @@ url311="http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPod/SBML
 url311a="http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPhone/061-7238.20090918.23GhT/iPod3,1_3.1.1_7C146_Restore.ipsw"
 url312="http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPhone/061-7271.20091008.Tch23/iPod3,1_3.1.2_7D11_Restore.ipsw"
 url313="http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPhone/061-7473.20100202.4i44t/iPod3,1_3.1.3_7E18_Restore.ipsw"
+url40="http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPhone4/061-7381.20100621.AzSP9/iPod3,1_4.0_8A293_Restore.ipsw"
+url402="http://appldnld.apple.com/iPhone4/061-8554.20100811.Bgt54/iPod3,1_4.0.2_8A400_Restore.ipsw"
+url41="http://appldnld.apple.com/iPhone4/061-7941.20100908.sV9KE/iPod3,1_4.1_8B117_Restore.ipsw"
+url42="https://secure-appldnld.apple.com/iPhone4/061-8273.20101105.73etw/ipod3,1_4.2_8c134_restore.ipsw"
+url421="https://secure-appldnld.apple.com/iPhone4/061-9860.20101122.Xsde3/iPod3,1_4.2.1_8C148_Restore.ipsw"
 
 if [ "$1" == "3.1.1" ]
 then
@@ -150,7 +156,126 @@ then
         echo "Firmware files are already patched..."
     fi
 fi
-
+if [ "$1" == "4.0" ]
+then
+    mkdir 4.0/
+    cd 4.0/
+    if [[ ! -f ibss ]] && [[ ! -f devicetree ]] && [[ ! -f kernelcache ]]
+    then
+        echo "Downloading Firmware files..."
+        ../bin/partialZipBrowser -g Firmware/dfu/iBSS.n18ap.RELEASE.dfu $url40 > /dev/null
+        ../bin/partialZipBrowser -g Firmware/all_flash/all_flash.n18ap.production/DeviceTree.n18ap.img3 $url40 > /dev/null
+        ../bin/partialZipBrowser -g kernelcache.release.n18 $url40 > /dev/null
+        echo "Patching iBSS..."
+        ../bin/xpwntool iBSS.n18ap.RELEASE.dfu iBSSdec -iv 27c5becf5fea4936b44ab27f22ede19b -k 2e9374bcf55a4d14495141eddfdb9cca039a7dc0913676586cb3e19bcde135db > /dev/null
+        ../bin/iBoot32Patcher iBSSdec iBSSpwn --rsa -b "-v" > /dev/null
+        ../bin/xpwntool iBSSpwn iBSS -t iBSS.n18ap.RELEASE.dfu > /dev/null
+        echo "Cleaning up..."
+        rm iBSS.n18ap.RELEASE.dfu iBSSdec iBSSpwn
+        mv iBSS ibss
+        mv DeviceTree.n18ap.img3 devicetree
+        mv kernelcache.release.n18 kernelcache
+        cd ..
+    else
+        echo "Firmware files are already patched..."
+    fi
+fi
+if [ "$1" == "4.0.2" ]
+then
+    mkdir 4.0.2/
+    cd 4.0.2/
+    if [[ ! -f ibss ]] && [[ ! -f devicetree ]] && [[ ! -f kernelcache ]]
+    then
+        echo "Downloading Firmware files..."
+        ../bin/partialZipBrowser -g Firmware/dfu/iBSS.n18ap.RELEASE.dfu $url402 > /dev/null
+        ../bin/partialZipBrowser -g Firmware/all_flash/all_flash.n18ap.production/DeviceTree.n18ap.img3 $url402 > /dev/null
+        ../bin/partialZipBrowser -g kernelcache.release.n18 $url402 > /dev/null
+        echo "Patching iBSS..."
+        ../bin/xpwntool iBSS.n18ap.RELEASE.dfu iBSSdec -iv 27c5becf5fea4936b44ab27f22ede19b -k 2e9374bcf55a4d14495141eddfdb9cca039a7dc0913676586cb3e19bcde135db > /dev/null
+        ../bin/iBoot32Patcher iBSSdec iBSSpwn --rsa -b "-v" > /dev/null
+        ../bin/xpwntool iBSSpwn iBSS -t iBSS.n18ap.RELEASE.dfu > /dev/null
+        echo "Cleaning up..."
+        rm iBSS.n18ap.RELEASE.dfu iBSSdec iBSSpwn
+        mv iBSS ibss
+        mv DeviceTree.n18ap.img3 devicetree
+        mv kernelcache.release.n18 kernelcache
+        cd ..
+    else
+        echo "Firmware files are already patched..."
+    fi
+fi
+if [ "$1" == "4.1" ]
+then
+    mkdir 4.1/
+    cd 4.1/
+    if [[ ! -f ibss ]] && [[ ! -f devicetree ]] && [[ ! -f kernelcache ]]
+    then
+        echo "Downloading Firmware files..."
+        ../bin/partialZipBrowser -g Firmware/dfu/iBSS.n18ap.RELEASE.dfu $url41 > /dev/null
+        ../bin/partialZipBrowser -g Firmware/all_flash/all_flash.n18ap.production/DeviceTree.n18ap.img3 $url41 > /dev/null
+        ../bin/partialZipBrowser -g kernelcache.release.n18 $url41 > /dev/null
+        echo "Patching iBSS..."
+        ../bin/xpwntool iBSS.n18ap.RELEASE.dfu iBSSdec -iv 45e620eb1cabe17cb5e25018e628160e -k 1b45e1726a88d3e89a203a59544b853c531758dd3c6f15fd9fa24cfa4ebc949d > /dev/null
+        ../bin/iBoot32Patcher iBSSdec iBSSpwn --rsa -b "-v" > /dev/null
+        ../bin/xpwntool iBSSpwn iBSS -t iBSS.n18ap.RELEASE.dfu > /dev/null
+        echo "Cleaning up..."
+        rm iBSS.n18ap.RELEASE.dfu iBSSdec iBSSpwn
+        mv iBSS ibss
+        mv DeviceTree.n18ap.img3 devicetree
+        mv kernelcache.release.n18 kernelcache
+        cd ..
+    else
+        echo "Firmware files are already patched..."
+    fi
+fi
+if [ "$1" == "4.2" ]
+then
+    mkdir 4.2/
+    cd 4.2/
+    if [[ ! -f ibss ]] && [[ ! -f devicetree ]] && [[ ! -f kernelcache ]]
+    then
+        echo "Downloading Firmware files..."
+        ../bin/partialZipBrowser -g Firmware/dfu/iBSS.n18ap.RELEASE.dfu $url42 > /dev/null
+        ../bin/partialZipBrowser -g Firmware/all_flash/all_flash.n18ap.production/DeviceTree.n18ap.img3 $url42 > /dev/null
+        ../bin/partialZipBrowser -g kernelcache.release.n18 $url42 > /dev/null
+        echo "Patching iBSS..."
+        ../bin/xpwntool iBSS.n18ap.RELEASE.dfu iBSSdec -iv 962cc5a04ef71269630fd05b7d43f0d6 -k f51e414ba2cb4bf68fcd1ea70d420207d4e269d048265b6480764e65af511904 > /dev/null
+        ../bin/iBoot32Patcher iBSSdec iBSSpwn --rsa -b "-v" > /dev/null
+        ../bin/xpwntool iBSSpwn iBSS -t iBSS.n18ap.RELEASE.dfu > /dev/null
+        echo "Cleaning up..."
+        rm iBSS.n18ap.RELEASE.dfu iBSSdec iBSSpwn
+        mv iBSS ibss
+        mv DeviceTree.n18ap.img3 devicetree
+        mv kernelcache.release.n18 kernelcache
+        cd ..
+    else
+        echo "Firmware files are already patched..."
+    fi
+fi
+if [ "$1" == "4.2.1" ]
+then
+    mkdir 4.2.1/
+    cd 4.2.1/
+    if [[ ! -f ibss ]] && [[ ! -f devicetree ]] && [[ ! -f kernelcache ]]
+    then
+        echo "Downloading Firmware files..."
+        ../bin/partialZipBrowser -g Firmware/dfu/iBSS.n18ap.RELEASE.dfu $url421 > /dev/null
+        ../bin/partialZipBrowser -g Firmware/all_flash/all_flash.n18ap.production/DeviceTree.n18ap.img3 $url421 > /dev/null
+        ../bin/partialZipBrowser -g kernelcache.release.n18 $url421 > /dev/null
+        echo "Patching iBSS..."
+        ../bin/xpwntool iBSS.n18ap.RELEASE.dfu iBSSdec -iv 962cc5a04ef71269630fd05b7d43f0d6 -k f51e414ba2cb4bf68fcd1ea70d420207d4e269d048265b6480764e65af511904 > /dev/null
+        ../bin/iBoot32Patcher iBSSdec iBSSpwn --rsa -b "-v" > /dev/null
+        ../bin/xpwntool iBSSpwn iBSS -t iBSS.n18ap.RELEASE.dfu > /dev/null
+        echo "Cleaning up..."
+        rm iBSS.n18ap.RELEASE.dfu iBSSdec iBSSpwn
+        mv iBSS ibss
+        mv DeviceTree.n18ap.img3 devicetree
+        mv kernelcache.release.n18 kernelcache
+        cd ..
+    else
+        echo "Firmware files are already patched..."
+    fi
+fi
 echo "Would you like to boot?"
 read -p "Y/N: " bootchoice
 if [[ $bootchoice == Y ]]
@@ -161,7 +286,7 @@ then
         cd 3.1.1
         echo "Place device in DFU mode and press enter"
         read -p "Waiting for enter input..."
-        ../bin/iPwnder32 -p
+        ../bin/iPwnder32 -p > /dev/null
         sleep 0.1
         echo "Sending pwned iBSS..."
         ../bin/irecovery -f ibss > /dev/null
@@ -225,6 +350,121 @@ then
     if [[ $version == 3.1.3 ]]
     then
         cd 3.1.3/
+        echo "Place device in DFU mode and press enter"
+        read -p "Waiting for enter input..."
+        echo "Entering pwned DFU mode..."
+        ../bin/iPwnder32 -p > /dev/null
+        sleep 0.1
+        echo "Sending pwned iBSS..."
+        ../bin/irecovery -f ibss > /dev/null
+        echo "Unplug your iPod and replug it back in."
+        read -p "Press enter when the screen lights up white: "
+        echo "Because on an issue with irecovery binaries, you'll be entering in these commands manually. iRecovery will open a shell, and you will need to enter the following commands"
+        echo "1. /send devicetree"
+        echo "2. devicetree"
+        echo "3. /send kernelcache"
+        echo "4. bootx"
+        echo "5. /exit"
+        sleep 0.5
+        echo "Enter commands now."
+        ../bin/irecovery -s > /dev/null
+        echo "Done! Device should now be booting."
+    fi
+    if [[ $version == 4.0 ]]
+    then
+        cd 4.0/
+        echo "Place device in DFU mode and press enter"
+        read -p "Waiting for enter input..."
+        echo "Entering pwned DFU mode..."
+        ../bin/iPwnder32 -p > /dev/null
+        sleep 0.1
+        echo "Sending pwned iBSS..."
+        ../bin/irecovery -f ibss > /dev/null
+        echo "Unplug your iPod and replug it back in."
+        read -p "Press enter when the screen lights up white: "
+        echo "Because on an issue with irecovery binaries, you'll be entering in these commands manually. iRecovery will open a shell, and you will need to enter the following commands"
+        echo "1. /send devicetree"
+        echo "2. devicetree"
+        echo "3. /send kernelcache"
+        echo "4. bootx"
+        echo "5. /exit"
+        sleep 0.5
+        echo "Enter commands now."
+        ../bin/irecovery -s > /dev/null
+        echo "Done! Device should now be booting."
+    fi
+    if [[ $version == 4.0.2 ]]
+    then
+        cd 4.0.2/
+        echo "Place device in DFU mode and press enter"
+        read -p "Waiting for enter input..."
+        echo "Entering pwned DFU mode..."
+        ../bin/iPwnder32 -p > /dev/null
+        sleep 0.1
+        echo "Sending pwned iBSS..."
+        ../bin/irecovery -f ibss > /dev/null
+        echo "Unplug your iPod and replug it back in."
+        read -p "Press enter when the screen lights up white: "
+        echo "Because on an issue with irecovery binaries, you'll be entering in these commands manually. iRecovery will open a shell, and you will need to enter the following commands"
+        echo "1. /send devicetree"
+        echo "2. devicetree"
+        echo "3. /send kernelcache"
+        echo "4. bootx"
+        echo "5. /exit"
+        sleep 0.5
+        echo "Enter commands now."
+        ../bin/irecovery -s > /dev/null
+        echo "Done! Device should now be booting."
+    fi
+    if [[ $version == 4.1 ]]
+    then
+        cd 4.1/
+        echo "Place device in DFU mode and press enter"
+        read -p "Waiting for enter input..."
+        echo "Entering pwned DFU mode..."
+        ../bin/iPwnder32 -p > /dev/null
+        sleep 0.1
+        echo "Sending pwned iBSS..."
+        ../bin/irecovery -f ibss > /dev/null
+        echo "Unplug your iPod and replug it back in."
+        read -p "Press enter when the screen lights up white: "
+        echo "Because on an issue with irecovery binaries, you'll be entering in these commands manually. iRecovery will open a shell, and you will need to enter the following commands"
+        echo "1. /send devicetree"
+        echo "2. devicetree"
+        echo "3. /send kernelcache"
+        echo "4. bootx"
+        echo "5. /exit"
+        sleep 0.5
+        echo "Enter commands now."
+        ../bin/irecovery -s > /dev/null
+        echo "Done! Device should now be booting."
+    fi
+    if [[ $version == 4.2 ]]
+    then
+        cd 4.2/
+        echo "Place device in DFU mode and press enter"
+        read -p "Waiting for enter input..."
+        echo "Entering pwned DFU mode..."
+        ../bin/iPwnder32 -p > /dev/null
+        sleep 0.1
+        echo "Sending pwned iBSS..."
+        ../bin/irecovery -f ibss > /dev/null
+        echo "Unplug your iPod and replug it back in."
+        read -p "Press enter when the screen lights up white: "
+        echo "Because on an issue with irecovery binaries, you'll be entering in these commands manually. iRecovery will open a shell, and you will need to enter the following commands"
+        echo "1. /send devicetree"
+        echo "2. devicetree"
+        echo "3. /send kernelcache"
+        echo "4. bootx"
+        echo "5. /exit"
+        sleep 0.5
+        echo "Enter commands now."
+        ../bin/irecovery -s > /dev/null
+        echo "Done! Device should now be booting."
+    fi
+    if [[ $version == 4.2.1 ]]
+    then
+        cd 4.2.1/
         echo "Place device in DFU mode and press enter"
         read -p "Waiting for enter input..."
         echo "Entering pwned DFU mode..."
