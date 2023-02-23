@@ -27,8 +27,10 @@ dayt0n for irecovery
 
 tihmstar for partialZipBrowser
 
-ud327 for helping test and giving me the idea to do this in the first place.
+# special thanks to
+
+ud327 for helping test and giving me the idea to do this in the first place
 
 iphoneguy1101 for patched/signed 3.1.3 cfw and 4.1 cfw
 
-mo/vanam for the sick honda prelude <3
+mo/vanam for the sick '89 honda prelude <3
