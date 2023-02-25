@@ -26,7 +26,7 @@ Allows for tetherbooting iPod touch 3G
 iOS 3-4, iPod3,1 only
 5.x support coming soon.
 
-  -d  --dependencies         Downloads all binaries
+  -d  --dependencies         Downloads all binaries.
   -b, --boot                 Tether boot directly.
 ```
 
