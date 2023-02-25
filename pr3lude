@@ -8,7 +8,7 @@ echo "5.x support coming soon."
 if [ "$1" == "-h" ]||[ "$1" == "--help" ]||[ -z "$1" ];
 then
     echo
-    echo "  -d  --dependencies         Downloads all binaries"
+    echo "  -d  --dependencies         Downloads all binaries."
     echo "  -b, --boot                 Tether boot directly."
     echo
     exit
