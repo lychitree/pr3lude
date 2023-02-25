@@ -16,13 +16,17 @@ IPSWs found here: [Google Drive folder](https://drive.google.com/drive/folders/1
 5.x support coming soon.
 
 # Usage
+
+**Run `pr3lude -d` before using to download all binaries required**
+
 ```
-Version: 2.0a [2023/24/02]
+Version: 2.0b [2023/24/02]
 Usage: pr3lude [VERSION]
 Allows for tetherbooting iPod touch 3G
 iOS 3-4, iPod3,1 only
 5.x support coming soon.
 
+  -d  --dependencies         Downloads all binaries
   -b, --boot                 Tether boot directly.
 ```
 
@@ -30,7 +34,7 @@ iOS 3-4, iPod3,1 only
 
 ```
 $ ./pr3lude 3.1.3
-Version: 2.0a (2023/24/02)
+Version: 2.0b (2023/24/02)
 Usage: pr3lude [VERSION]
 Allows for tetherbooting iPod touch 3G
 iOS 3-4, iPod3,1 only

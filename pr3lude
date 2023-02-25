@@ -1,6 +1,6 @@
 #!/bin/bash
 #lychi (2023)
-echo "Version: 2.0a [2023/24/02]"
+echo "Version: 2.0b [2023/24/02]"
 echo "Usage: pr3lude [VERSION]"
 echo "Allows for tetherbooting iPod touch 3G"
 echo "iOS 3-4, iPod3,1 only"
@@ -8,16 +8,15 @@ echo "5.x support coming soon."
 if [ "$1" == "-h" ]||[ "$1" == "--help" ]||[ -z "$1" ];
 then
     echo
+    echo "  -d  --dependencies         Downloads all binaries"
     echo "  -b, --boot                 Tether boot directly."
     echo
     exit
 fi
 
 #download tools
-if [[ -f bin/xpwntool ]] && [[ -f bin/partialZipBrowser ]] && [[ -f bin/iBoot32Patcher ]] && [[ -f bin/iPwnder32 ]] && [[ -f bin/irecovery ]]
+if [[ "$1" == "-d" ]] || [[ "$1" == "--dependencies" ]]
 then
-    echo
-else
     echo
     echo "Downloading binaries"
     rm -rf bin/
@@ -46,9 +45,10 @@ else
     if [[ -f bin/iBoot32Patcher ]]
     then
         echo "Binaries successfully downloaded."
-        echo
+        exit
     else
         echo "iBoot32Patcher binary compilation failed."
+        exit
     fi
 fi
 
